@@ -123,13 +123,8 @@ HTTP 429 Too Many Requests
 
 And logs will appear in Postgres:
 
-```
-id | ip_address | path        | method | status | timestamp
-------------------------------------------------------------
-1  | 127.0.0.1  | /api/ping/  | GET    | 200
-2  | 127.0.0.1  | /api/ping/  | GET    | 429
-...
-```
+<img width="1033" height="577" alt="image" src="https://github.com/user-attachments/assets/bbe8c55f-ba04-4e13-939b-65059d0aa901" />
+
 
 ---
 
