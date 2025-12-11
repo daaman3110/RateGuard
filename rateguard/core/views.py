@@ -19,7 +19,25 @@ def redis_test(request):
     # Get Client IP
     ip = request.META.get("REMOTE_ADDR", "unknown")
 
-    # Count requests per IP
+    # 1) Count requests per IP
     count = increment_counter(ip)
 
-    return Response({"ip": ip, "count": count})
+    # 2) Set the rate limit
+    LIMIT = 5
+    WINDOW = 60
+
+    # 3) Apply limit rule
+    if count > LIMIT:
+        return Response(
+            {
+                "error": "Rate Limit Exceeded",
+                "ip": ip,
+                "count": count,
+                "limit": LIMIT,
+                "window": WINDOW,
+            },
+            status=429,
+        )
+
+    # 4) Allowed Request
+    return Response({"message": "OK", "ip": ip, "count": count})
